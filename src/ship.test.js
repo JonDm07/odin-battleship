@@ -7,6 +7,18 @@ test("Create object", () => {
   expect(obj).toHaveProperty("timesHit", 0);
 });
 
+test("Hit ship", () => {
+  const obj = Ship(4);
+  obj.hit();
+
+  expect(obj.timesHit).toBe(1);
+
+  obj.hit();
+  obj.hit();
+
+  expect(obj.timesHit).toBe(3);
+});
+
 test("Sunk ship", () => {
   const obj = Ship(3);
   obj.timesHit = 3;
