@@ -1,14 +1,14 @@
 import { Ship } from "./ship";
 
 test("Create object", () => {
-  const obj = Ship(4);
+  const obj = new Ship(4);
 
   expect(obj).toHaveProperty("length", 4);
   expect(obj).toHaveProperty("timesHit", 0);
 });
 
 test("Hit ship", () => {
-  const obj = Ship(4);
+  const obj = new Ship(4);
   obj.hit();
 
   expect(obj.timesHit).toBe(1);
@@ -20,7 +20,7 @@ test("Hit ship", () => {
 });
 
 test("Sunk ship", () => {
-  const obj = Ship(3);
+  const obj = new Ship(3);
   obj.timesHit = 3;
 
   expect(obj.isSunk()).toBe(true);

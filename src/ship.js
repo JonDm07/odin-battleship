@@ -1,17 +1,18 @@
-export function Ship(length) {
-  return {
-    length,
-    timesHit: 0,
+export class Ship {
+  constructor(length) {
+    this.length = length;
+    this.timesHit = 0;
+  }
 
-    hit: function () {
-      if (this.timesHit >= this.length) {
-        return;
-      } else {
-        this.timesHit += 1;
-      }
-    },
-    isSunk: function () {
-      return this.timesHit >= this.length;
-    },
-  };
+  hit() {
+    if (this.timesHit >= this.length) {
+      return;
+    } else {
+      this.timesHit += 1;
+    }
+  }
+
+  isSunk() {
+    return this.timesHit >= this.length;
+  }
 }
