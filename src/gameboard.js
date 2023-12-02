@@ -1,10 +1,45 @@
-import { Ship } from "./ship";
-import { convertPosition } from "./index";
+import { Ship } from "./ship.js";
+import { convertPosition } from "./index.js";
 
 export class Gameboard {
-  // add start and end position
-  // check if position is not taken
+  //check if position is not taken
+
+  #positionIsTaken(arrayA, arrayB) {
+    for (let i = 0; i < arrayA.length; i++) {
+      for (let j = 0; j < arrayB.length; j++) {
+        if (arrayA[i].toString() === arrayB[j].toString()) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  createPositions(startPoint, rotation, length) {
+    const positions = [];
+
+    for (let i = 1; i < length; i++) {
+      if (rotation === "x") {
+        if (startPoint[1] + i > 9) {
+          throw new Error("Invalid ship position");
+        }
+
+        positions.push([startPoint[0], startPoint[1] + i]);
+      } else if (rotation === "y") {
+        if (startPoint[0] + i > 9) {
+          throw new Error("Invalid ship position");
+        }
+
+        positions.push([startPoint[0] + i, startPoint[1]]);
+      }
+    }
+
+    return positions;
+  }
+
   placeShip(position, rotation, length) {
+    //check if position or rotation or not empty args
     if (
       rotation === undefined ||
       rotation === null ||
@@ -14,28 +49,37 @@ export class Gameboard {
       return;
     }
 
-    if (rotation === "x") {
-      const startPoint = convertPosition(position);
+    const startPoint = convertPosition(position);
+    const newShipPositions = [startPoint].concat(
+      this.createPositions(startPoint, rotation, length)
+    );
 
-      if (startPoint[1] > 9) {
-        return;
-      }
-    } else if (rotation === "y") {
-      const coords = convertPosition(position);
+    //check if position is not out of gameboard
+    if (
+      startPoint[0] > 9 ||
+      startPoint[1] > 9 ||
+      startPoint[0] < 0 ||
+      startPoint[1] < 0
+    ) {
+      return;
+    }
 
-      if (coords[0] > 9) {
+    if (!this.ships) {
+      this.ships = [];
+    }
+
+    // check if position is not taken
+    for (let i = 0; i < this.ships.length; i++) {
+      const ship = this.ships[i];
+
+      if (this.#positionIsTaken(ship.position, newShipPositions) === true) {
         return;
       }
     }
 
-    if (!this.shipsPositions) {
-      this.shipsPositions = [];
-    }
-
-    const ship = Ship(length);
-    ship.position = position;
+    const ship = new Ship(length);
     ship.rotation = rotation;
-
-    this.shipsPositions.push(ship);
+    ship.position = newShipPositions;
+    this.ships.push(ship);
   }
 }
