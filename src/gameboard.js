@@ -55,6 +55,7 @@ export class Gameboard {
     );
 
     //check if position is not out of gameboard
+    //remove, check before calling function
     if (
       startPoint[0] > 9 ||
       startPoint[1] > 9 ||
@@ -77,9 +78,30 @@ export class Gameboard {
       }
     }
 
+    //add ship
     const ship = new Ship(length);
     ship.rotation = rotation;
     ship.position = newShipPositions;
     this.ships.push(ship);
+  }
+
+  receiveAttack(number) {
+    const position = [convertPosition(number)];
+
+    for (let i = 0; i < this.ships.length; i++) {
+      const ship = this.ships[i];
+
+      if (this.#positionIsTaken(ship.position, position) === true) {
+        ship.hit();
+        return true;
+      }
+    }
+
+    if (!this.attacksReceived) {
+      this.attacksReceived = [];
+    }
+
+    this.attacksReceived.push[position[0]];
+    return false;
   }
 }
