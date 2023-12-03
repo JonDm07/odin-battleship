@@ -35,6 +35,7 @@ test("Receive attack horizontal", () => {
 
   expect(obj.receiveAttack(22)).toBe(true);
   expect(obj.receiveAttack(32)).toBe(false);
+  expect(obj.attacksReceived.length).toBe(2);
 });
 
 test("Receive attack vertical", () => {
@@ -44,4 +45,20 @@ test("Receive attack vertical", () => {
 
   expect(obj.receiveAttack(22)).toBe(true);
   expect(obj.receiveAttack(23)).toBe(false);
+  expect(obj.attacksReceived.length).toBe(2);
+});
+
+test("Ships not sunk", () => {
+  const obj = new Gameboard();
+
+  obj.placeShip(22, "y", 3);
+  obj.placeShip(23, "y", 3);
+
+  expect(obj.shipsNotSunk).toBe(2);
+
+  obj.receiveAttack(22);
+  obj.receiveAttack(32);
+  obj.receiveAttack(42);
+
+  expect(obj.shipsNotSunk).toBe(1);
 });

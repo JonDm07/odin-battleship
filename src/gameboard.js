@@ -88,6 +88,12 @@ export class Gameboard {
   receiveAttack(number) {
     const position = [convertPosition(number)];
 
+    if (!this.attacksReceived) {
+      this.attacksReceived = [];
+    }
+
+    this.attacksReceived.push(position[0]);
+
     for (let i = 0; i < this.ships.length; i++) {
       const ship = this.ships[i];
 
@@ -96,12 +102,16 @@ export class Gameboard {
         return true;
       }
     }
+    return false;
+  }
 
-    if (!this.attacksReceived) {
-      this.attacksReceived = [];
+  get shipsNotSunk() {
+    const array = [];
+
+    for (let ship of this.ships) {
+      if (!ship.isSunk()) array.push(ship);
     }
 
-    this.attacksReceived.push[position[0]];
-    return false;
+    return array.length;
   }
 }
