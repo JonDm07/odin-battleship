@@ -94,17 +94,21 @@ export class Gameboard {
 
     this.attacksReceived.push(position[0]);
 
-    for (let i = 0; i < this.ships.length; i++) {
-      const ship = this.ships[i];
+    if (this.ships) {
+      //check if ship is hit
+      for (let i = 0; i < this.ships.length; i++) {
+        const ship = this.ships[i];
 
-      if (this.#positionIsTaken(ship.position, position) === true) {
-        ship.hit();
-        return true;
+        if (this.#positionIsTaken(ship.position, position) === true) {
+          ship.hit();
+          return true;
+        }
       }
     }
     return false;
   }
 
+  //return number of ships not sunk yet
   get shipsNotSunk() {
     const array = [];
 
