@@ -1,5 +1,5 @@
 import { Ship } from "./ship.js";
-import { convertPosition } from "./index.js";
+import { convertPosition } from "./helper_fn.js";
 
 export class Gameboard {
   //check if position is not taken

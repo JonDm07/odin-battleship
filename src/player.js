@@ -1,4 +1,4 @@
-import { convertPosition } from ".";
+import { convertPosition } from "./helper_fn";
 
 export class Player {
   constructor(name) {
