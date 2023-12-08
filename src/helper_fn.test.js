@@ -1,4 +1,4 @@
-import { convertPosition } from "./helper_fn";
+import { convertPosition } from "./helper_fn.js";
 
 test("convert number to position", () => {
   expect(convertPosition(49)).toEqual([4, 9]);

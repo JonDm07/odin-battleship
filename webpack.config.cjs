@@ -7,6 +7,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     static: "./dist",
+    hot: true,
   },
   output: {
     filename: "[name].js",
@@ -16,6 +17,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Battleship",
+      template: "./src/index.html",
     }),
   ],
   module: {
