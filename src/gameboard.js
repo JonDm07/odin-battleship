@@ -7,7 +7,7 @@ export class Gameboard {
   #positionIsTaken(arrayA, arrayB) {
     for (let i = 0; i < arrayA.length; i++) {
       for (let j = 0; j < arrayB.length; j++) {
-        if (arrayA[i].toString() === arrayB[j].toString()) {
+        if (arrayA[i] === arrayB[j]) {
           return true;
         }
       }
@@ -45,20 +45,17 @@ export class Gameboard {
     if (
       rotation === undefined ||
       rotation === null ||
-      position === undefined ||
-      position === null
+      startPosition === undefined ||
+      startPosition === null
     ) {
       return;
     }
 
-    //check if position is not out of gameboard
+    //createPositions check if position is valid and then creates positions
     //remove, check before calling function
-    if (
-      startPoint[0] > 9 ||
-      startPoint[1] > 9 ||
-      startPoint[0] < 0 ||
-      startPoint[1] < 0
-    ) {
+    const shipPositions = this.createPositions(startPosition, rotation, length);
+
+    if (!shipPositions) {
       return;
     }
 
@@ -70,7 +67,7 @@ export class Gameboard {
     for (let i = 0; i < this.ships.length; i++) {
       const ship = this.ships[i];
 
-      if (this.#positionIsTaken(ship.position, newShipPositions) === true) {
+      if (this.#positionIsTaken(ship.position, shipPositions) === true) {
         return;
       }
     }
@@ -78,25 +75,23 @@ export class Gameboard {
     //add ship
     const ship = new Ship(length);
     ship.rotation = rotation;
-    ship.position = newShipPositions;
+    ship.position = shipPositions;
     this.ships.push(ship);
   }
 
   receiveAttack(number) {
-    const position = [convertPosition(number)];
-
     if (!this.attacksReceived) {
       this.attacksReceived = [];
     }
 
-    this.attacksReceived.push(position[0]);
+    this.attacksReceived.push(number);
 
     if (this.ships) {
       //check if ship is hit
       for (let i = 0; i < this.ships.length; i++) {
         const ship = this.ships[i];
 
-        if (this.#positionIsTaken(ship.position, position) === true) {
+        if (ship.position.includes(number) === true) {
           ship.hit();
           return true;
         }
