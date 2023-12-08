@@ -17,28 +17,30 @@ export class Gameboard {
   }
 
   createPositions(startPoint, rotation, length) {
-    const positions = [];
+    const coordinates = convertPosition(startPoint);
+    const positions = [startPoint];
 
-    for (let i = 1; i < length; i++) {
-      if (rotation === "x") {
-        if (startPoint[1] + i > 9) {
-          throw new Error("Invalid ship position");
-        }
+    if (rotation === "x") {
+      if (coordinates[1] > 10 - length) {
+        return;
+      }
 
-        positions.push([startPoint[0], startPoint[1] + i]);
-      } else if (rotation === "y") {
-        if (startPoint[0] + i > 9) {
-          throw new Error("Invalid ship position");
-        }
-
-        positions.push([startPoint[0] + i, startPoint[1]]);
+      for (let i = 1; i < length; i++) {
+        positions.push(Number(`${coordinates[0]}${coordinates[1] + i}`));
+      }
+    } else if (rotation === "y") {
+      if (coordinates[0] > 10 - length) {
+        return;
+      }
+      for (let i = 1; i < length; i++) {
+        positions.push(Number(`${coordinates[0] + i}${coordinates[1]}`));
       }
     }
 
     return positions;
   }
 
-  placeShip(position, rotation, length) {
+  placeShip(startPosition, rotation, length) {
     //check if position or rotation or not empty args
     if (
       rotation === undefined ||
@@ -48,11 +50,6 @@ export class Gameboard {
     ) {
       return;
     }
-
-    const startPoint = convertPosition(position);
-    const newShipPositions = [startPoint].concat(
-      this.createPositions(startPoint, rotation, length)
-    );
 
     //check if position is not out of gameboard
     //remove, check before calling function
