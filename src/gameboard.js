@@ -42,12 +42,7 @@ export class Gameboard {
 
   placeShip(startPosition, rotation, length) {
     //check if position or rotation or not empty args
-    if (
-      rotation === undefined ||
-      rotation === null ||
-      startPosition === undefined ||
-      startPosition === null
-    ) {
+    if (!rotation || !startPosition) {
       return;
     }
 
@@ -56,6 +51,10 @@ export class Gameboard {
     const shipPositions = this.createPositions(startPosition, rotation, length);
 
     if (!shipPositions) {
+      return;
+    }
+
+    if (rotation !== "x" && rotation !== "y") {
       return;
     }
 

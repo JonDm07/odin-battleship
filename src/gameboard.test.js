@@ -48,7 +48,7 @@ test("Receive attack vertical", () => {
   expect(obj.attacksReceived.length).toBe(2);
 });
 
-test("Ships not sunk", () => {
+test("Sink a ship", () => {
   const obj = new Gameboard();
 
   obj.placeShip(22, "y", 3);
