@@ -18,7 +18,7 @@ export class Gameboard {
 
   createPositions(startPoint, rotation, length) {
     const coordinates = convertPosition(startPoint);
-    const positions = [startPoint];
+    const positions = [Number(startPoint)];
 
     if (rotation === "x") {
       if (coordinates[1] > 10 - length) {

@@ -15,11 +15,11 @@ johnGameboard.placeShip("26", "y", 3);
 johnGameboard.placeShip("84", "x", 3);
 johnGameboard.placeShip("69", "y", 2);
 
-lianGameboard.placeShip("0", "y", 5);
-lianGameboard.placeShip("43", "x", 4);
-lianGameboard.placeShip("26", "y", 3);
-lianGameboard.placeShip("84", "x", 3);
-lianGameboard.placeShip("69", "y", 2);
+lianGameboard.placeShip("01", "y", 5);
+lianGameboard.placeShip("44", "x", 4);
+lianGameboard.placeShip("36", "y", 3);
+lianGameboard.placeShip("85", "x", 3);
+lianGameboard.placeShip("79", "y", 2);
 
 const firstGameboard = document.querySelector(".gameboard:first-of-type");
 renderGameboard(firstGameboard);
@@ -28,3 +28,4 @@ const secondGameboard = document.querySelector(".gameboard:nth-of-type(2)");
 renderGameboard(secondGameboard);
 
 renderShips(firstGameboard, johnGameboard);
+renderShips(secondGameboard, lianGameboard);

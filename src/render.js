@@ -17,13 +17,15 @@ export function renderGameboard(gameboard) {
 }
 
 export function renderShips(div, gameboard) {
-  const squares = document;
+  const squares = div.querySelectorAll(".square");
 
-  console.log(gameboard);
-
-  for (let i = 0; i < /* gameboard.ships.length */ 1; i++) {
+  for (let i = 0; i < gameboard.ships.length; i++) {
     const positions = gameboard.ships[i].position;
 
-    for (let j = 0; j < positions.length; j++) {}
+    for (let j = 0; j < positions.length; j++) {
+      const square = squares[positions[j]];
+
+      square.classList.add("ship");
+    }
   }
 }
