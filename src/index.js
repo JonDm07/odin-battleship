@@ -1,6 +1,6 @@
 import { Gameboard } from "./gameboard.js";
 import { Player } from "./player.js";
-import { renderGameboard, renderShips } from "./render.js";
+import { renderGameboard, renderShips, renderShots } from "./render.js";
 import "./style.css";
 
 const John = new Player("John");
@@ -21,6 +21,10 @@ lianGameboard.placeShip("36", "y", 3);
 lianGameboard.placeShip("85", "x", 3);
 lianGameboard.placeShip("79", "y", 2);
 
+lianGameboard.receiveAttack("1");
+lianGameboard.receiveAttack("45");
+lianGameboard.receiveAttack("36");
+
 const firstGameboard = document.querySelector(".gameboard:first-of-type");
 renderGameboard(firstGameboard);
 
@@ -28,4 +32,4 @@ const secondGameboard = document.querySelector(".gameboard:nth-of-type(2)");
 renderGameboard(secondGameboard);
 
 renderShips(firstGameboard, johnGameboard);
-renderShips(secondGameboard, lianGameboard);
+renderShots(secondGameboard, lianGameboard);

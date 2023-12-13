@@ -29,3 +29,18 @@ export function renderShips(div, gameboard) {
     }
   }
 }
+
+export function renderShots(div, gameboard) {
+  const squares = div.querySelectorAll(".square");
+  console.log(gameboard);
+
+  for (const hit of gameboard.attacksReceived) {
+    const square = squares[hit];
+
+    if (gameboard.shipsHit.includes(hit)) {
+      square.style.backgroundColor = "red";
+    } else {
+      square.style.backgroundColor = "blue";
+    }
+  }
+}

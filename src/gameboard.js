@@ -79,6 +79,8 @@ export class Gameboard {
   }
 
   receiveAttack(number) {
+    number = Number(number);
+
     if (!this.attacksReceived) {
       this.attacksReceived = [];
     }
@@ -91,6 +93,8 @@ export class Gameboard {
         const ship = this.ships[i];
 
         if (ship.position.includes(number) === true) {
+          if (!this.shipsHit) this.shipsHit = [];
+          this.shipsHit.push(number);
           ship.hit();
           return true;
         }

@@ -57,7 +57,13 @@ test("Sink a ship", () => {
   expect(obj.shipsNotSunk).toBe(2);
 
   obj.receiveAttack(22);
+
+  expect(obj.shipsHit[0]).toBe(22);
+
   obj.receiveAttack(32);
+
+  expect(obj.shipsHit[1]).toBe(32);
+
   obj.receiveAttack(42);
 
   expect(obj.shipsNotSunk).toBe(1);
