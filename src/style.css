@@ -3,13 +3,14 @@
 }
 
 body, html {
-    height: 100svh;
     margin: 0px;
+    height: 100%;
+    overflow: hidden;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 80px;
+html {
+    width: 100svw;
+    height: 100svh;
 }
 
 body {
@@ -17,6 +18,91 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    display: grid;
+    grid-template-rows: 70px 10fr;
+
+    height: 100svh;
+
+    position: relative;
+}
+
+.modal {
+    width: min(800px, 80%);
+    height: min(800px, 80%);
+    border: var(--border);
+    background-color: white;
+    position: relative;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal > .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.modal > p {
+    font-size: 84px;
+    text-align: center;
+
+    margin: 0px;
+}
+
+.modal > input {
+    height: 64px;
+    font-size: 48px;
+    width: 80%;
+}
+
+header {
+    border: var(--border);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header > * {
+    flex: 1;
+    height: 100%;
+    margin: 0px 30px;
+}
+
+header > .name {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border: var(--border);
+}
+
+header > .icons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+header > .icons > img {
+    height: 50px;
+    transition: all 200ms linear;
+}
+
+header > .icons > img:hover {
+    height: 60px;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px
+;
 }
 
 .gameboard {

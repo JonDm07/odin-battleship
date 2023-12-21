@@ -1,7 +1,11 @@
 import { Gameboard } from "./gameboard.js";
 import { Player } from "./player.js";
 import { renderGameboard, renderShips, renderShots } from "./render.js";
+import gear from "./assets/icons8-gear-64.png";
+import help from "./assets/icons8-help-64.png";
+import info from "./assets/icons8-info-64.png";
 import "./style.css";
+import { createModal } from "./modal.js";
 
 const John = new Player("John");
 const Lian = new Player("Lian");
@@ -25,11 +29,15 @@ lianGameboard.receiveAttack("1");
 lianGameboard.receiveAttack("45");
 lianGameboard.receiveAttack("36");
 
-const firstGameboard = document.querySelector(".gameboard:first-of-type");
+/* const firstGameboard = document.querySelector(".gameboard:first-of-type");
 renderGameboard(firstGameboard);
 
 const secondGameboard = document.querySelector(".gameboard:nth-of-type(2)");
 renderGameboard(secondGameboard);
 
 renderShips(firstGameboard, johnGameboard);
-renderShots(secondGameboard, lianGameboard);
+renderShots(secondGameboard, lianGameboard); */
+
+console.log("hi");
+
+createModal();
