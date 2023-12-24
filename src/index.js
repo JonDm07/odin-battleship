@@ -1,9 +1,7 @@
 import { Gameboard } from "./gameboard.js";
 import { Player } from "./player.js";
 import { renderGameboard, renderShips, renderShots } from "./render.js";
-import gear from "./assets/icons8-gear-64.png";
-import help from "./assets/icons8-help-64.png";
-import info from "./assets/icons8-info-64.png";
+import { assets } from "./assets.js";
 import "./style.css";
 import { createModal } from "./modal.js";
 

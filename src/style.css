@@ -28,10 +28,9 @@ body {
 }
 
 .modal {
-    width: min(800px, 80%);
+    width: max(100px, 70vw);
     height: min(800px, 80%);
-    border: var(--border);
-    background-color: white;
+    padding: 0px 30px;    
     position: relative;
     margin: auto;
 
@@ -39,30 +38,73 @@ body {
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(assets/hansjorg-keller-FyDwImn9yMw-unsplash.jpg);
+
+
+    border-radius: 20px;
 }
 
-.modal > .close {
+.modal button {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    min-width: 50px;
+    min-height: 50px;
+    padding: 0px;
+
+    outline: none;
+    border: none;
+    background-color: transparent;
+    transition: all 200ms linear;
+}
+
+.modal button:hover {
+    width: 60px;
+    height: 60px;
+}
+
+.modal .close {
     position: absolute;
     top: 20px;
     right: 20px;
+
+    background-image: url(assets/icons8-close-64.png);
+}
+
+.modal .submit {
+    background-image: url(assets/icons8-checkmark-64.png);
 }
 
 .modal > p {
-    font-size: 84px;
-    text-align: center;
+    font-size: 64px;
+    text-shadow: #FC0 1px 0 10px;
+    min-width: min-content;
 
     margin: 0px;
 }
 
-.modal > input {
-    height: 64px;
-    font-size: 48px;
-    width: 80%;
+.modal input {
+    width: 0;
+    font-size: 32px;
+    flex: 5;
+}
+
+.modal span {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+
 }
 
 header {
-    border: var(--border);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,7 +120,6 @@ header > .name {
     display: flex;
     align-items: center;
     justify-content: start;
-    border: var(--border);
 }
 
 header > .icons {
