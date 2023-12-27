@@ -34,6 +34,8 @@ export function renderShots(div, gameboard) {
   const squares = div.querySelectorAll(".square");
   console.log(gameboard);
 
+  if (!gameboard.attacksReceived) return;
+
   for (const hit of gameboard.attacksReceived) {
     const square = squares[hit];
 

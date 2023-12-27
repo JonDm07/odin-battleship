@@ -1,4 +1,4 @@
-export function createModal() {
+export function createNameModal() {
   const body = document.querySelector("body");
 
   const modalDiv = document.createElement("div");
@@ -22,4 +22,10 @@ export function createModal() {
   const submitButton = document.createElement("button");
   submitButton.classList.add("submit");
   span.appendChild(submitButton);
+
+  return modalDiv;
+}
+
+export function closeModal(div) {
+  div.style.display = "none";
 }

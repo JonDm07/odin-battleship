@@ -3,7 +3,7 @@ import { Player } from "./player.js";
 import { renderGameboard, renderShips, renderShots } from "./render.js";
 import { assets } from "./assets.js";
 import "./style.css";
-import { createModal } from "./modal.js";
+import { closeModal, createNameModal } from "./modal.js";
 
 const John = new Player("John");
 const Lian = new Player("Lian");
@@ -23,19 +23,30 @@ lianGameboard.placeShip("36", "y", 3);
 lianGameboard.placeShip("85", "x", 3);
 lianGameboard.placeShip("79", "y", 2);
 
-lianGameboard.receiveAttack("1");
-lianGameboard.receiveAttack("45");
-lianGameboard.receiveAttack("36");
+const modal = createNameModal();
 
-/* const firstGameboard = document.querySelector(".gameboard:first-of-type");
+const closeButton = modal.querySelector(".close");
+closeButton.addEventListener("click", () => {
+  closeModal(modal);
+});
+
+const submitButton = modal.querySelector(".submit");
+submitButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const name = modal.querySelector("input").value;
+
+  const namePara = document.querySelector(".name > p");
+  namePara.textContent = `Admiral ${name}`;
+
+  closeModal(modal);
+});
+
+const firstGameboard = document.querySelector(".gameboard:first-of-type");
 renderGameboard(firstGameboard);
 
 const secondGameboard = document.querySelector(".gameboard:nth-of-type(2)");
 renderGameboard(secondGameboard);
 
 renderShips(firstGameboard, johnGameboard);
-renderShots(secondGameboard, lianGameboard); */
-
-console.log("hi");
-
-createModal();
+renderShots(secondGameboard, lianGameboard);

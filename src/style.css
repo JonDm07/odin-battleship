@@ -1,5 +1,6 @@
 :root {
     --border: 1px solid black;
+    --text-shadow: #FC0 1px 0 10px;
 }
 
 body, html {
@@ -20,7 +21,7 @@ body {
     background-size: cover;
 
     display: grid;
-    grid-template-rows: 70px 10fr;
+    grid-template-rows: 70px 5fr;
 
     height: 100svh;
 
@@ -29,10 +30,14 @@ body {
 
 .modal {
     width: max(100px, 70vw);
-    height: min(800px, 80%);
+    height: min(800px, 80vh);
     padding: 0px 30px;    
-    position: relative;
     margin: auto;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     display: flex;
     justify-content: space-evenly;
@@ -83,7 +88,7 @@ body {
 
 .modal > p {
     font-size: 64px;
-    text-shadow: #FC0 1px 0 10px;
+    text-shadow: var(--text-shadow);
     min-width: min-content;
 
     margin: 0px;
@@ -108,6 +113,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 header > * {
@@ -120,6 +126,9 @@ header > .name {
     display: flex;
     align-items: center;
     justify-content: start;
+
+    text-shadow: var(--text-shadow);
+    font-size: 36px;
 }
 
 header > .icons {
@@ -140,16 +149,21 @@ header > .icons > img:hover {
 
 .hero {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 80px
-;
+    gap: 20px;
+    padding: 0px 30px;
 }
 
 .gameboard {
-    width: 500px;
-    height: 500px;
+    flex: 1;
     border: var(--border);
+    height: 500px;
+
+
+    min-width: 300px;
+    max-width: 500px;
+    
 
     display: grid;
     grid-template-rows: repeat(10, 1fr);
