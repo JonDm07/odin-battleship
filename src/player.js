@@ -6,23 +6,20 @@ export class Player {
   }
 
   attackPosition(gameboard, position) {
-    gameboard.receiveAttack(position);
+    return gameboard.receiveAttack(position);
   }
 
   randomAttack(gameboard) {
     let randomPosition = Math.floor(Math.random() * 100);
-    randomPosition = convertPosition(randomPosition);
 
     if (gameboard.attacksReceived) {
       for (let i = 0; i < gameboard.attacksReceived.length; i++) {
-        if (
-          gameboard.attacksReceived[i].toString() === randomPosition.toString()
-        ) {
-          return;
+        if (gameboard.attacksReceived[i] === randomPosition) {
+          return false;
         }
       }
     }
 
-    this.attackPosition(gameboard, randomPosition);
+    return this.attackPosition(gameboard, randomPosition);
   }
 }

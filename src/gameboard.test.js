@@ -32,10 +32,12 @@ test("Receive attack horizontal", () => {
   const obj = new Gameboard();
 
   obj.placeShip(22, "x", 3);
+  obj.placeShip(1, "x", 2);
 
   expect(obj.receiveAttack(22)).toBe(true);
   expect(obj.receiveAttack(32)).toBe(false);
-  expect(obj.attacksReceived.length).toBe(2);
+  expect(obj.receiveAttack(1)).toBe(true);
+  expect(obj.attacksReceived.length).toBe(3);
 });
 
 test("Receive attack vertical", () => {

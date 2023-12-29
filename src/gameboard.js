@@ -4,6 +4,10 @@ import { convertPosition } from "./helper_fn.js";
 export class Gameboard {
   //check if position is not taken
 
+  constructor(player) {
+    this.player = player;
+  }
+
   #positionIsTaken(arrayA, arrayB) {
     for (let i = 0; i < arrayA.length; i++) {
       for (let j = 0; j < arrayB.length; j++) {
@@ -83,6 +87,11 @@ export class Gameboard {
 
     if (!this.attacksReceived) {
       this.attacksReceived = [];
+    } else {
+      //check if position was already attacked
+      if (this.attacksReceived.includes(number)) {
+        return "Attacked";
+      }
     }
 
     this.attacksReceived.push(number);
@@ -96,11 +105,12 @@ export class Gameboard {
           if (!this.shipsHit) this.shipsHit = [];
           this.shipsHit.push(number);
           ship.hit();
-          return true;
+          return "Hit";
         }
       }
     }
-    return false;
+
+    return "Miss";
   }
 
   //return number of ships not sunk yet
