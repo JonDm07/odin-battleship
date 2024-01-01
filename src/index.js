@@ -66,9 +66,8 @@ squares.forEach((square) => {
       square.style.backgroundColor = "red";
     } else if (result === "Miss") {
       square.style.backgroundColor = "blue";
-    } else if (!result) {
-      console.log("attacked");
-      return;
     }
+
+    square.onclick = undefined;
   };
 });
