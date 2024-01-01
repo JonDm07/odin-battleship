@@ -16,7 +16,7 @@ export class Gameloop {
   }
 
   playTurnWithAi(position) {
-    const result = this.playerA.attackPosition(this.boardB, position);
+    const result = this.boardB.receiveAttack(position);
     if (result === "Miss" || result === "Hit") {
       const aiPlay = this.playerB.randomAttack(this.boardA);
       this.turn++;

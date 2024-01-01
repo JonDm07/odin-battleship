@@ -34,9 +34,9 @@ test("Receive attack horizontal", () => {
   obj.placeShip(22, "x", 3);
   obj.placeShip(1, "x", 2);
 
-  expect(obj.receiveAttack(22)).toBe(true);
-  expect(obj.receiveAttack(32)).toBe(false);
-  expect(obj.receiveAttack(1)).toBe(true);
+  expect(obj.receiveAttack(22)).toBe("Hit");
+  expect(obj.receiveAttack(32)).toBe("Miss");
+  expect(obj.receiveAttack(1)).toBe("Hit");
   expect(obj.attacksReceived.length).toBe(3);
 });
 
@@ -45,8 +45,8 @@ test("Receive attack vertical", () => {
 
   obj.placeShip(22, "y", 3);
 
-  expect(obj.receiveAttack(22)).toBe(true);
-  expect(obj.receiveAttack(23)).toBe(false);
+  expect(obj.receiveAttack(22)).toBe("Hit");
+  expect(obj.receiveAttack(23)).toBe("Miss");
   expect(obj.attacksReceived.length).toBe(2);
 });
 

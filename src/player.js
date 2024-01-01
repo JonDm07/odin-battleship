@@ -5,10 +5,6 @@ export class Player {
     this.name = name;
   }
 
-  attackPosition(gameboard, position) {
-    return gameboard.receiveAttack(position);
-  }
-
   randomAttack(gameboard) {
     let randomPosition = Math.floor(Math.random() * 100);
 
@@ -20,6 +16,6 @@ export class Player {
       }
     }
 
-    return this.attackPosition(gameboard, randomPosition);
+    return gameboard.receiveAttack(randomPosition);
   }
 }
