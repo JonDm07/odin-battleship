@@ -12,18 +12,21 @@ const lian = new Player("Lian");
 
 const johnGameboard = new Gameboard(john);
 const lianGameboard = new Gameboard(lian);
+try {
+  johnGameboard.placeShip("0", "y", 5);
+  johnGameboard.placeShip("43", "x", 4);
+  johnGameboard.placeShip("28", "y", 3);
+  johnGameboard.placeShip("84", "x", 3);
+  johnGameboard.placeShip("69", "y", 2);
 
-johnGameboard.placeShip("0", "y", 5);
-johnGameboard.placeShip("43", "x", 4);
-johnGameboard.placeShip("26", "y", 3);
-johnGameboard.placeShip("84", "x", 3);
-johnGameboard.placeShip("69", "y", 2);
-
-lianGameboard.placeShip("1", "y", 5);
-lianGameboard.placeShip("44", "x", 4);
-lianGameboard.placeShip("36", "y", 3);
-lianGameboard.placeShip("85", "x", 3);
-lianGameboard.placeShip("79", "y", 2);
+  lianGameboard.placeShip("1", "y", 5);
+  lianGameboard.placeShip("44", "x", 4);
+  lianGameboard.placeShip("39", "y", 3);
+  lianGameboard.placeShip("85", "x", 3);
+  lianGameboard.placeShip("79", "y", 2);
+} catch (error) {
+  alert(error);
+}
 
 const gameloop = new Gameloop(johnGameboard, lianGameboard);
 
@@ -52,11 +55,12 @@ renderGameboard(firstGameboard);
 const secondGameboard = document.querySelector(".gameboard:nth-of-type(2)");
 renderGameboard(secondGameboard);
 
-const squares = Array.from(secondGameboard.querySelectorAll(".square"));
+const squaresA = Array.from(firstGameboard.querySelectorAll(".square"));
+const squaresB = Array.from(secondGameboard.querySelectorAll(".square"));
 
 renderShips(firstGameboard, johnGameboard);
 
-squares.forEach((square) => {
+squaresB.forEach((square) => {
   square.onclick = function () {
     const position = square.getAttribute("data-num");
 
@@ -66,6 +70,14 @@ squares.forEach((square) => {
       square.style.backgroundColor = "red";
     } else if (result === "Miss") {
       square.style.backgroundColor = "blue";
+    }
+
+    if (gameloop.winner) {
+      alert(gameloop.winner.name);
+
+      squaresB.forEach((square) => {
+        square.onclick = undefined;
+      });
     }
 
     square.onclick = undefined;

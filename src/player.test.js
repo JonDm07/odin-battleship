@@ -7,7 +7,7 @@ test("random attack", () => {
 
   expect(player.name).toBe("John");
 
-  player.randomAttack(obj);
+  player.randomAttack(obj, Math.floor(Math.random() * 100));
 
   expect(obj.attacksReceived.length).toBe(1);
 });

@@ -6,6 +6,8 @@ export class Gameboard {
 
   constructor(player) {
     this.player = player;
+    this.attacksReceived = [];
+    this.ships = [];
   }
 
   #positionIsTaken(arrayA, arrayB) {
@@ -47,7 +49,7 @@ export class Gameboard {
   placeShip(startPosition, rotation, length) {
     //check if position or rotation or not empty args
     if (!rotation || !startPosition) {
-      return;
+      return false;
     }
 
     //createPositions check if position is valid and then creates positions
@@ -55,15 +57,11 @@ export class Gameboard {
     const shipPositions = this.createPositions(startPosition, rotation, length);
 
     if (!shipPositions) {
-      return;
+      return false;
     }
 
     if (rotation !== "x" && rotation !== "y") {
-      return;
-    }
-
-    if (!this.ships) {
-      this.ships = [];
+      return false;
     }
 
     // check if position is not taken
@@ -71,27 +69,20 @@ export class Gameboard {
       const ship = this.ships[i];
 
       if (this.#positionIsTaken(ship.position, shipPositions) === true) {
-        return;
+        throw new Error(startPosition);
       }
     }
 
     //add ship
-    const ship = new Ship(length);
-    ship.rotation = rotation;
-    ship.position = shipPositions;
+    const ship = new Ship(length, rotation, shipPositions);
     this.ships.push(ship);
   }
 
   receiveAttack(number) {
     number = Number(number);
-
-    if (!this.attacksReceived) {
-      this.attacksReceived = [];
-    } else {
-      //check if position was already attacked
-      if (this.attacksReceived.includes(number)) {
-        return "Attacked";
-      }
+    //check if position was already attacked
+    if (this.attacksReceived.includes(number)) {
+      return "Attacked";
     }
 
     this.attacksReceived.push(number);
@@ -116,6 +107,8 @@ export class Gameboard {
   //return number of ships not sunk yet
   get shipsNotSunk() {
     const array = [];
+
+    if (!this.ships) return false;
 
     for (let ship of this.ships) {
       if (!ship.isSunk()) array.push(ship);

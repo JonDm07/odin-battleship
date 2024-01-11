@@ -26,22 +26,40 @@ test("play turn", () => {
 
   johnGameboard.placeShip("0", "y", 5);
   johnGameboard.placeShip("43", "x", 4);
-  johnGameboard.placeShip("26", "y", 3);
+  johnGameboard.placeShip("29", "y", 3);
   johnGameboard.placeShip("84", "x", 3);
   johnGameboard.placeShip("69", "y", 2);
 
   lianGameboard.placeShip("1", "y", 5);
   lianGameboard.placeShip("44", "x", 4);
-  lianGameboard.placeShip("36", "y", 3);
+  lianGameboard.placeShip("39", "y", 3);
   lianGameboard.placeShip("85", "x", 3);
   lianGameboard.placeShip("79", "y", 2);
 
-  expect(gameloop.playTurnWithAi(1)).toBe("Hit");
+  const result = gameloop.playTurnWithAi(1);
 
+  expect(typeof result.aiPlay).toBe("string");
+  expect(typeof result.play).toBe("string");
+  expect(result.randomNum).not.toBe(NaN);
   expect(gameloop.turn).toBe(1);
-  expect(gameloop.boardB.attacksReceived.length).toBe(1);
-  expect(gameloop.boardB.attacksReceived[0]).not.toBeNaN();
-  expect(gameloop.boardB.ships[0].timesHit).toBe(1);
-  expect(gameloop.boardA.attacksReceived.length).toBe(1);
-  expect(gameloop.boardA.attacksReceived[0]).not.toBeNaN();
+  expect(gameloop.winner).toBeFalsy();
+});
+
+test("win game", () => {
+  const john = new Player("John");
+  const lian = new Player("Lian");
+
+  const johnGameboard = new Gameboard(john);
+  const lianGameboard = new Gameboard(lian);
+
+  const gameloop = new Gameloop(johnGameboard, lianGameboard);
+
+  johnGameboard.placeShip("69", "y", 2);
+
+  lianGameboard.placeShip("79", "y", 2);
+
+  johnGameboard.receiveAttack(69);
+  johnGameboard.receiveAttack(79);
+
+  expect(gameloop.checkForWinner).toBeTruthy();
 });

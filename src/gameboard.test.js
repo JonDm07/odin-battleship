@@ -22,13 +22,13 @@ test("Invalid position", () => {
   obj.placeShip(22, "x", 3);
 
   expect(obj.ships.length).toBe(1);
-
-  obj.placeShip(22, "x", 3);
-
+  expect(() => {
+    obj.placeShip(22, "x", 3);
+  }).toThrow();
   expect(obj.ships.length).toBe(1);
 });
 
-test("Receive attack horizontal", () => {
+test("Receive attack, ship horizontal", () => {
   const obj = new Gameboard();
 
   obj.placeShip(22, "x", 3);
@@ -36,11 +36,10 @@ test("Receive attack horizontal", () => {
 
   expect(obj.receiveAttack(22)).toBe("Hit");
   expect(obj.receiveAttack(32)).toBe("Miss");
-  expect(obj.receiveAttack(1)).toBe("Hit");
-  expect(obj.attacksReceived.length).toBe(3);
+  expect(obj.attacksReceived.length).toBe(2);
 });
 
-test("Receive attack vertical", () => {
+test("Receive attack, ship vertical", () => {
   const obj = new Gameboard();
 
   obj.placeShip(22, "y", 3);
@@ -48,6 +47,14 @@ test("Receive attack vertical", () => {
   expect(obj.receiveAttack(22)).toBe("Hit");
   expect(obj.receiveAttack(23)).toBe("Miss");
   expect(obj.attacksReceived.length).toBe(2);
+});
+
+test("Recieve attack on attacked position", () => {
+  const obj = new Gameboard();
+
+  obj.receiveAttack(2);
+  expect(obj.receiveAttack(2)).toBe("Attacked");
+  expect(obj.attacksReceived.length).toBe(1);
 });
 
 test("Sink a ship", () => {

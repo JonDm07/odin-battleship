@@ -1,6 +1,8 @@
 export class Ship {
-  constructor(length) {
+  constructor(length, rotation, position) {
     this.length = length;
+    this.rotation = rotation;
+    this.position = position;
     this.timesHit = 0;
   }
 

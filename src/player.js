@@ -5,9 +5,7 @@ export class Player {
     this.name = name;
   }
 
-  randomAttack(gameboard) {
-    let randomPosition = Math.floor(Math.random() * 100);
-
+  randomAttack(gameboard, randomPosition) {
     if (gameboard.attacksReceived) {
       for (let i = 0; i < gameboard.attacksReceived.length; i++) {
         if (gameboard.attacksReceived[i] === randomPosition) {

@@ -13,15 +13,47 @@ export class Gameloop {
       this.playerA = boardA.player;
       this.playerB = boardB.player;
     }
+
+    this.winner = undefined;
   }
 
   playTurnWithAi(position) {
-    const result = this.boardB.receiveAttack(position);
-    if (result === "Miss" || result === "Hit") {
-      const aiPlay = this.playerB.randomAttack(this.boardA);
+    const play = this.boardB.receiveAttack(position);
+    let randomNum = Math.floor(Math.random() * 100);
+
+    if (play === "Miss" || play === "Hit") {
+      let aiPlay = this.playerB.randomAttack(this.boardA, randomNum);
+
+      while (aiPlay === "Attacked") {
+        randomNum = Math.floor(Math.random() * 100);
+        aiPlay = this.playerB.randomAttack(this.boardA, randomNum);
+      }
+
+      if (this.checkForWinner()) {
+        return this.winner;
+      }
+
+      const returnValue = { play, aiPlay, randomNum };
+
       this.turn++;
-      return result;
+      return returnValue;
     } else if (result === "Attacked") {
+      return false;
+    }
+  }
+
+  checkForWinner() {
+    if (this.winner) return this.winner;
+
+    if (this.turn < 17) return false;
+
+    if (this.boardA.shipsNotSunk < this.boardA.ships) {
+      this.winner = this.boardA.player;
+      return this.winner;
+    } else if (this.boardB.shipsNotSunk < this.boardB.ships) {
+      this.winner = this.boardB.player;
+      return this.winner;
+    } else {
       return false;
     }
   }
