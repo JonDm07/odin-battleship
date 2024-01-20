@@ -61,5 +61,7 @@ test("win game", () => {
   johnGameboard.receiveAttack(69);
   johnGameboard.receiveAttack(79);
 
-  expect(gameloop.checkForWinner).toBeTruthy();
+  gameloop.checkForWinner();
+
+  expect(gameloop.winner).toHaveProperty("name", "Lian");
 });

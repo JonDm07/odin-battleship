@@ -24,13 +24,9 @@ export class Gameloop {
     if (play === "Miss" || play === "Hit") {
       let aiPlay = this.playerB.randomAttack(this.boardA, randomNum);
 
-      while (aiPlay === "Attacked") {
+      while (aiPlay === "Attacked" || aiPlay === false) {
         randomNum = Math.floor(Math.random() * 100);
         aiPlay = this.playerB.randomAttack(this.boardA, randomNum);
-      }
-
-      if (this.checkForWinner()) {
-        return this.winner;
       }
 
       const returnValue = { play, aiPlay, randomNum };
@@ -44,14 +40,14 @@ export class Gameloop {
 
   checkForWinner() {
     if (this.winner) return this.winner;
+    /* 
+    if (this.turn < 17) return false; */
 
-    if (this.turn < 17) return false;
-
-    if (this.boardA.shipsNotSunk < this.boardA.ships) {
-      this.winner = this.boardA.player;
-      return this.winner;
-    } else if (this.boardB.shipsNotSunk < this.boardB.ships) {
+    if (this.boardA.shipsNotSunk <= 0) {
       this.winner = this.boardB.player;
+      return this.winner;
+    } else if (this.boardB.shipsNotSunk <= 0) {
+      this.winner = this.boardA.player;
       return this.winner;
     } else {
       return false;
