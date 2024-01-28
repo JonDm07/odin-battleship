@@ -1,6 +1,11 @@
 import { Gameboard } from "./gameboard.js";
 import { Player } from "./player.js";
-import { renderGameboard, renderShips, renderShots } from "./DOM/render.js";
+import {
+  renderGameboard,
+  renderMainPage,
+  renderShips,
+  renderShots,
+} from "./DOM/render.js";
 import { assets } from "./assets.js";
 import "./style.css";
 import { NameModal } from "./DOM/modal.js";
@@ -32,18 +37,6 @@ try {
 const gameloop = new Gameloop(johnGameboard, lianGameboard);
 
 const modal = NameModal.createNameModal();
-
 NameModal.AddButtonListeners();
 
-const firstGameboard = document.querySelector(".gameboard:first-of-type");
-renderGameboard(firstGameboard);
-
-const secondGameboard = document.querySelector(".gameboard:nth-of-type(2)");
-renderGameboard(secondGameboard);
-
-const squaresA = Array.from(firstGameboard.querySelectorAll(".square"));
-const squaresB = Array.from(secondGameboard.querySelectorAll(".square"));
-
-renderShips(firstGameboard, johnGameboard);
-
-squareListeners(squaresB, squaresA, gameloop);
+renderMainPage(gameloop);
