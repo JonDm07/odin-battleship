@@ -1,4 +1,5 @@
 import { Gameboard } from "./gameboard.js";
+import { Player } from "./player.js";
 
 test("Place a ship", () => {
   const obj = new Gameboard();
@@ -77,3 +78,13 @@ test("Sink a ship", () => {
 
   expect(obj.shipsNotSunk).toBe(1);
 });
+/* 
+test("Receive smart attack", () => {
+  const player = new Player("John");
+  const obj = new Gameboard(player);
+
+  obj.placeShip(22, "x", 3);
+
+  console.log(player.smarterAttack(obj, 22));
+});
+ */

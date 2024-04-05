@@ -19,14 +19,12 @@ export class Gameloop {
 
   playTurnWithAi(position) {
     const play = this.boardB.receiveAttack(position);
-    let randomNum = Math.floor(Math.random() * 100);
 
     if (play === "Miss" || play === "Hit") {
-      let aiPlay = this.playerB.randomAttack(this.boardA, randomNum);
+      let { aiPlay, randomNum } = this.playerB.smarterAttack(this.boardA);
 
       while (aiPlay === "Attacked" || aiPlay === false) {
-        randomNum = Math.floor(Math.random() * 100);
-        aiPlay = this.playerB.randomAttack(this.boardA, randomNum);
+        ({ aiPlay, randomNum } = this.playerB.smarterAttack(this.boardA));
       }
 
       const returnValue = { play, aiPlay, randomNum };
